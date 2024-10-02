@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define GREEN "\033[32m"
+#define YELLOW "\033[33m"
+
+
 struct Contact {
     int id;
     char name[20];
@@ -39,7 +45,7 @@ void ajouter_contacts_defaut() {
 
 void ajout_contact() {
     if (ind >= 100) {
-        printf("le Carnet est plein!!\n" );
+        printf(YELLOW "le Carnet est plein!!\n" RESET);
         return;
     }
 
@@ -53,7 +59,7 @@ void ajout_contact() {
 
     for (int i = 0; i < ind; i++) {
         if (strcmp(table[i].phone, nvcontact.phone) == 0) {
-            printf( "ce numero est deja existe!!\n" );
+            printf( RED"ce numero est deja existe!!\n" RESET );
             return;
         }
     }
@@ -105,7 +111,7 @@ void rechercher_contact() {
 
 void modifier_contact() {
     char search[15];
-    printf("Pour modifier les infos de contact, merci de saisir son numéro de téléphone: ");
+    printf(YELLOW"Pour modifier les infos de contact, merci de saisir son numéro de téléphone: "RESET);
     scanf("%s", search);
 
     for (int i = 0; i < ind; i++) {
@@ -121,7 +127,7 @@ void modifier_contact() {
 
             for (int j = 0; j < ind; j++) {
                 if (strcmp(table[j].phone, nvtelephone) == 0 && j != i) {
-                    printf("le numero est deja utilisé!!\n" );
+                    printf(GREEN"le numero est deja utilisé!!\n" RESET);
                     return;
                 }
             }
@@ -148,7 +154,7 @@ void supprimer_contact() {
                 table[j] = table[j + 1];
             }
             ind--;
-            printf( "Contact supprimé avec succès.\n" );
+            printf(RED "Contact supprimé avec succès.\n"RESET );
             return;
         }
     }
